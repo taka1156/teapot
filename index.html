@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm a teapot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --porcelain: #FAF3E8;
+            --porcelain-deep: #F0E4D3;
+            --tea: #8B5A2B;
+            --tea-deep: #6B431E;
+            --ink: #3D2817;
+            --terracotta: #C97B4A;
+            --gopher-green: #5A7D6A;
+            --steam: rgba(255, 255, 255, 0.55);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100svh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(circle at 18% 12%, #FFFDF8 0%, transparent 45%),
+                radial-gradient(circle at 85% 88%, var(--porcelain-deep) 0%, transparent 50%),
+                var(--porcelain);
+            font-family: 'Zen Maru Gothic', sans-serif;
+            color: var(--ink);
+            padding: 6vh 5vw;
+            overflow-x: hidden;
+        }
+
+        .scene {
+            position: relative;
+            width: min(560px, 100%);
+        }
+
+        .card {
+            position: relative;
+            background: #FFFEFB;
+            border: 1px solid #E7D9C3;
+            border-radius: 28px;
+            padding: clamp(2rem, 5vw, 3.2rem) clamp(1.6rem, 6vw, 3rem) 2.6rem;
+            box-shadow:
+                0 1px 2px rgba(61, 40, 23, 0.06),
+                0 18px 40px -20px rgba(61, 40, 23, 0.25),
+                0 2px 0 var(--porcelain-deep) inset;
+            text-align: center;
+            transition: transform 0.45s cubic-bezier(.2, .8, .2, 1), box-shadow 0.45s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px) rotate(-0.3deg);
+            box-shadow:
+                0 1px 2px rgba(61, 40, 23, 0.08),
+                0 26px 50px -22px rgba(61, 40, 23, 0.32),
+                0 2px 0 var(--porcelain-deep) inset;
+        }
+
+        .eyebrow {
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--tea);
+            font-weight: 700;
+            margin: 0 0 0.6rem;
+        }
+
+        .status {
+            font-family: 'Fraunces', serif;
+            font-weight: 700;
+            font-size: clamp(4.2rem, 14vw, 6.5rem);
+            line-height: 0.9;
+            margin: 0;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            position: relative;
+            display: inline-block;
+        }
+
+        .status .dot {
+            color: var(--terracotta);
+        }
+
+        .headline {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: clamp(1.25rem, 4vw, 1.55rem);
+            margin: 0.3rem 0 1.6rem;
+            color: var(--tea-deep);
+        }
+
+        .figure-wrap {
+            position: relative;
+            margin: 0 auto 1.7rem;
+            width: min(100%, 380px);
+        }
+
+        .figure-frame {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(160deg, var(--porcelain-deep), #fff);
+            border: 1px solid #ECDFC9;
+            aspect-ratio: 4 / 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .figure-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* steam, purely decorative, sits above the frame */
+        .steam {
+            position: absolute;
+            top: -34px;
+            left: 0;
+            right: 0;
+            height: 40px;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+        }
+
+        .steam span {
+            display: block;
+            width: 6px;
+            height: 30px;
+            border-radius: 999px;
+            background: linear-gradient(to top, var(--steam), transparent);
+            filter: blur(2px);
+            transform-origin: bottom center;
+            animation: rise 3.2s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        .steam span:nth-child(2) {
+            animation-delay: 0.9s;
+            height: 24px;
+        }
+
+        .steam span:nth-child(3) {
+            animation-delay: 1.8s;
+        }
+
+        @keyframes rise {
+
+            0% {
+                transform: translateY(0) scaleY(0.8) translateX(0);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.8;
+            }
+
+            70% {
+                opacity: 0.35;
+            }
+
+            100% {
+                transform: translateY(-32px) scaleY(1.3) translateX(6px);
+                opacity: 0;
+            }
+        }
+
+        .caption {
+            font-size: 0.95rem;
+            color: var(--tea-deep);
+            margin: 0 0 1.9rem;
+            line-height: 1.7;
+        }
+
+        .caption strong {
+            color: var(--ink);
+            font-weight: 700;
+        }
+
+        .divider {
+            border: none;
+            height: 1px;
+            background: repeating-linear-gradient(to right,
+                    #E7D9C3,
+                    #E7D9C3 6px,
+                    transparent 6px,
+                    transparent 12px);
+            margin: 0 0 1.6rem;
+        }
+
+        .source-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4em;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--ink);
+            text-decoration: none;
+            padding: 0.7em 1.4em;
+            border-radius: 999px;
+            background: var(--porcelain);
+            border: 1px solid #E7D9C3;
+            transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, color 0.25s ease;
+        }
+
+        .source-link:hover {
+            background: var(--tea);
+            border-color: var(--tea);
+            color: #FFFDF8;
+            transform: translateY(-1px);
+        }
+
+        .source-link:focus-visible,
+        .card:focus-within {
+            outline: 3px solid var(--gopher-green);
+            outline-offset: 3px;
+        }
+
+        .source-link svg {
+            width: 0.95em;
+            height: 0.95em;
+            transition: transform 0.25s ease;
+        }
+
+        .source-link:hover svg {
+            transform: translate(2px, -2px);
+        }
+
+        footer {
+            margin-top: 1.6rem;
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--tea);
+            opacity: 0.75;
+            letter-spacing: 0.04em;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .card,
+            .source-link,
+            .steam span {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .card {
+                border-radius: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scene">
+        <div class="card">
+            <p class="eyebrow">HTTP Status</p>
+            <p class="status">418<span class="dot">.</span></p>
+            <p class="headline">I'm a teapot</p>
+
+            <div class="figure-wrap">
+                <div class="steam" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="figure-frame">
+                    <img src="./i_am_a_teapot.webp" alt="湯気の立つティーカップを前に、gopherとferris(Rustのマスコット)が向かい合ってお茶を楽しんでいるイラスト">
+                </div>
+            </div>
+
+            <p class="caption">
+                サーバーはティーポットであるため、<strong>コーヒーを淹れることを拒否</strong>します。<br>
+                お茶ならお淹れできます。
+            </p>
+
+            <hr class="divider">
+
+            <a class="source-link" href="https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Status/418" target="_blank" rel="noopener noreferrer">
+                元ネタを見る
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17 17 7" />
+                    <path d="M7 7h10v10" />
+                </svg>
+            </a>
+        </div>
+        <footer>RFC&nbsp;2324 · Hyper Text Coffee Pot Control Protocol</footer>
+    </div>
+</body>
+
+</html>

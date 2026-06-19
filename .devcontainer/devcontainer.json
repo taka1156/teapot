@@ -1,0 +1,39 @@
+{
+  "name": "teapot",
+  "dockerComposeFile": "./docker-compose.yml",
+  "service": "teapot",
+  "workspaceFolder": "/workspace",
+  "postCreateCommand": "yarn install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "MS-CEINTL.vscode-language-pack-ja",
+        "dbaeumer.vscode-eslint",
+        "stylelint.vscode-stylelint",
+        "esbenp.prettier-vscode",
+        "vitest.explorer",
+        "streetsidesoftware.code-spell-checker",
+        "username.errorlens"
+      ],
+      "settings": {
+        "terminal.integrated.cwd": "${containerWorkspaceFolder}",
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionOnSave": {
+          "source.fixAll.eslint": "explicit",
+          "source.fixAll.stylelint": "explicit"
+        },
+        "eslint.codeActionsOnSave.mode": "all",
+        "eslint.format.enable": false,
+        "prettier": {
+          "configPath": ".prettierrc.json"
+        },
+        "files.insertFinalNewline": true,
+        "errorLens.enabledDiagnosticLevels": [
+          "error",
+          "warning"
+        ]
+      }
+    }
+  }
+}
